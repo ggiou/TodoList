@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  <!--my batis 연동..-->
+<mapper namespace="com.practice.todolist.dao.ITodoDao">
+    <select id="selectAll" resultType="com.practice.todolist.dto.TodoDto">
+        select * from tbl_todo order by desc
+    </select> <!--전체 보기, 리스트..-->
+
+    <select id="selectOne" resultType="com.practice.todolist.dto.TodoDto">
+        select * from tbl_todo where tno = #{0}
+    </select> <!--단일 보기, 상세보기-->
+
+    <insert id="insertTodo">
+        insert into tbl_todo (title, writer, dueDate) values (#{param1}, #{param2}, #{param3})
+    </insert> <!--todo 삽입-->
+
+    <update id="updateTodo">
+        update tbl_todo set title = #{1}, date = #{2}, finished=#{3} where tno=#{0}
+    </update>   <!--todo 업데이트-->
+    
+    <delete id="deleteTodo">
+        delete from tbl_todo where tno = #{0}
+    </delete>   <!--todo 삭제-->
+
+
+
+</mapper>

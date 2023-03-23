@@ -7,7 +7,7 @@ import java.util.List;
 public interface ITodoService {
     public List<TodoDto> selectAll();
     public TodoDto selectOne(long tno);
-    public void insertTodo(String title, String date, String writer);
-    public void updateTodo(long tno, String title, String date, boolean finished);
-    public void deleteTodo(long tno);
+    public String insertTodo(String title, String dueDate, String writer);
+    public String updateTodo(long tno, String title, String dueDate, boolean finished);
+    public String deleteTodo(long tno);
 }
