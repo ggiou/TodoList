@@ -1,34 +1,46 @@
 package com.practice.todolist.service;
 
+import com.practice.todolist.dao.ITodoDao;
 import com.practice.todolist.dto.TodoDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class TodoService implements ITodoService{
+
+    @Autowired
+    ITodoDao dao;   //빈 등록, 사용하기 위해..
+
     @Override
     public List<TodoDto> selectAll() {
-        return null;
+        return dao.selectAll();
     }
 
     @Override
     public TodoDto selectOne(long tno) {
-        return null;
+        return dao.selectOne(tno);
     }
 
     @Override
-    public void insertTodo(String title, String date, String writer) {
+    public String insertTodo(String title, String dueDate, String writer) {
+        dao.insertTodo(title, dueDate, writer);
 
+        return title + "이 정상적으로 생성 되었습니다.";  //message 전달
     }
 
     @Override
-    public void updateTodo(long tno, String title, String date, boolean finished) {
+    public String updateTodo(long tno, String title, String dueDate, boolean finished) {
+        dao.updateTodo(tno, title, dueDate, finished);
 
+        return title + "이 정상적으로 업데이트 되었습니다.";
     }
 
     @Override
-    public void deleteTodo(long tno) {
+    public String deleteTodo(long tno) {
+        dao.deleteTodo(tno);
 
+        return tno + "번 todo가 삭제 되었습니다.";
     }
 }
