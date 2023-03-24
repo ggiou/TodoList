@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  <!--my batis 연동..-->
 <mapper namespace="com.practice.todolist.dao.ITodoDao">
     <select id="selectAll" resultType="com.practice.todolist.dto.TodoDto">
-        select * from tbl_todo order by desc
+        select * from tbl_todo order by tno desc
     </select> <!--전체 보기, 리스트..-->
 
     <select id="selectOne" resultType="com.practice.todolist.dto.TodoDto">
@@ -16,7 +16,7 @@
     </insert> <!--todo 삽입-->
 
     <update id="updateTodo">
-        update tbl_todo set title = #{1}, date = #{2}, finished=#{3} where tno=#{0}
+        update tbl_todo set title = #{param2}, dueDate = #{param3}, finished=#{param4} where tno=#{param1}
     </update>   <!--todo 업데이트-->
     
     <delete id="deleteTodo">
@@ -26,3 +26,5 @@
 
 
 </mapper>
+
+<!--Path From Content Root 에서 디렉토리 주소가 .이 아닌 /로 잘 연동 되어있는지 확인!-->

@@ -3,14 +3,13 @@ package com.practice.todolist.dao;
 import com.practice.todolist.dto.TodoDto;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
 public interface ITodoDao {
     public List<TodoDto> selectAll();
     public TodoDto selectOne(long tno);
-    public void insertTodo(String title, String date, String writer);
+    public void insertTodo(String title, String writer, String date);
     public void updateTodo(long tno, String title, String date, boolean finished);
     public void deleteTodo(long tno);
 

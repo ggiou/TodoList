@@ -11,21 +11,30 @@ import java.util.List;
 public class TodoService implements ITodoService{
 
     @Autowired
-    ITodoDao dao;   //빈 등록, 사용하기 위해..
+    private ITodoDao dao;
 
     @Override
     public List<TodoDto> selectAll() {
-        return dao.selectAll();
+        if (dao.selectAll() == null) {
+            System.out.println("현재 존재하는 게시글이 없습니다.");
+            return null;
+
+        }else {
+            return dao.selectAll();
+        }
     }
 
     @Override
     public TodoDto selectOne(long tno) {
+        if (dao.selectOne(tno) == null){
+            System.out.println(tno+"번 게시물이 존재하지 않습니다.");
+        }
         return dao.selectOne(tno);
     }
 
     @Override
-    public String insertTodo(String title, String dueDate, String writer) {
-        dao.insertTodo(title, dueDate, writer);
+    public String insertTodo(String title, String writer, String date) {
+        dao.insertTodo(title, writer, date);
 
         return title + "이 정상적으로 생성 되었습니다.";  //message 전달
     }
