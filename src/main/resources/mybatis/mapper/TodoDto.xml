@@ -27,6 +27,11 @@
         select count(*) from tbl_todo
     </select> <!--전체 todo 게시물 수 확인-->
 
+    <select id="findTodoList" resultType="com.practice.todolist.dto.TodoDto">
+        select * from tbl_todo where title like #{title} and writer like #{writer}
+            and dueDate between #{date1} and #{date2} and finished = #{finished}
+    </select>
+
 
 </mapper>
 

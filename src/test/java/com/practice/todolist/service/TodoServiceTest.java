@@ -8,7 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -76,5 +78,33 @@ class TodoServiceTest {
         //만약 selectOne으로 삭제한 게시글을 찾아왔을때 존재하지 않는다면 tno에 -1을
         //넣어 aseertThat을 통해 -1이 나오면 정상적으로 삭제되었고, 테스트 성공
         //추후에 exception 처리 후 null포인터 에러가 나오면 정상적으로 되도록 변경 예정
+    }
+
+    @Test
+    void findTodoList(){
+        Map<String, String> map = new HashMap<>();
+        map.put("title", null);
+        map.put("writer", null);
+        map.put("date1", null);
+        map.put("date2", null);
+        map.put("finished", null);
+        //null, 즉 아무런 체크를 하지 않는다면 서비스 내부에서 해당조건에 대해서는 검색을 하지 않는다 생각
+
+        List<TodoDto> todoList = service.findTodoList(map);
+
+        assertThat(todoList.size()).isEqualTo(0);
+        //검색조건이 없으면 = null, finished의 경우 무저건 true, false의 값으로 반환되야 하므로
+        //테스트를 위해 넣은 코드로 인해 finished에 null이 들어가면 2가 반환되므로 아무것도 검색되지 않는다
+        //조건에 해당하는 결과가 없으므로 사이즈가 0이라면 알맞게 작동했다 생각해 테스트 성공
+
+        /* for (TodoDto todoDto : todoList) {
+            System.out.println(todoDto.getTno());
+            System.out.println(todoDto.getTitle());
+            System.out.println(todoDto.getWriter());
+            System.out.println(todoDto.getDueDate());
+            System.out.println(todoDto.isFinished());
+            System.out.println("-------------------");
+        }*/
+        //검색한 todoList 출력
     }
 }
