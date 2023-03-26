@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface ITodoService {
     public List<TodoDto> selectAll();
-    public TodoDto selectOne(long tno);
+    public TodoDto selectOne(int tno);
     public String insertTodo(String title, String writer, String date);
-    public String updateTodo(long tno, String title, String dueDate, boolean finished);
-    public String deleteTodo(long tno);
+    public String updateTodo(int tno, String title, String dueDate, boolean finished);
+    public String deleteTodo(int tno);
+    public int totalCountTodo();
 }

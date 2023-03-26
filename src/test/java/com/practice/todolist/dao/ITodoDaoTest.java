@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ITodoDaoTest {
 //추후에 시스템이 커질 경우 system.out이 아닌 assertThat 등
 // 확인작업을 통해야 효율 개선.. -> 고칠 예정, 우선 간단한 확인 작업
+// + assertThat을 통한 빠른 테스트 코드 -> service에서 적용    
     @Autowired
     ITodoDao dao;
     

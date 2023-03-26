@@ -23,6 +23,9 @@
         delete from tbl_todo where tno = #{0}
     </delete>   <!--todo 삭제-->
 
+    <select id="totalCountTodo" resultType="_int">
+        select count(*) from tbl_todo
+    </select> <!--전체 todo 게시물 수 확인-->
 
 
 </mapper>

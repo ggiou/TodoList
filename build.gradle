@@ -38,7 +38,9 @@ dependencies {
 
     //tomcat
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+
+    //test - junit
+    testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.0') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 
@@ -47,11 +49,13 @@ dependencies {
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 
 
+
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16'
 
 
 }
 
+// Junit5 활성화
 test {
     useJUnitPlatform()
 }
