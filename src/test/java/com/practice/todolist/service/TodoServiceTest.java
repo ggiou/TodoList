@@ -71,7 +71,6 @@ class TodoServiceTest {
     void deleteTodo() {
         int tno = service.selectAll().get(0).getTno(); //가장 최신 게시물의 tno 가져오기
         service.deleteTodo(tno);
-        List<TodoDto> todoDtos = service.selectAll();
         if(service.selectOne(tno) == null) tno = -1;
         assertThat(tno).isEqualTo(-1);
         //만약 selectOne으로 삭제한 게시글을 찾아왔을때 존재하지 않는다면 tno에 -1을

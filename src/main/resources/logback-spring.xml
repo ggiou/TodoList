@@ -15,7 +15,7 @@
     <logger name="jdbc.resultsettable" level="OFF" />
     <logger name="jdbc.connection" level="OFF" />
     <!-- log4j2-jdbc4 -->
-    <logger name="com.practice.todolist.dao" level="DEBUG"/>
+    <logger name="com.practice.todolist.dao" level="INFO"/>
 	<!-- level: 로그 보여주는 수준, 대부분은 info로 적용 -->
 	
     

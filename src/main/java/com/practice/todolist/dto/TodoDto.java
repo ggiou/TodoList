@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class TodoDto {
     private int tno;
     private String title;
+    private String writer;
     private LocalDate dueDate;
     private boolean finished;
 }
