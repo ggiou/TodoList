@@ -7,10 +7,10 @@ import java.util.Map;
 
 public interface ITodoService {
     public List<TodoDto> selectAll();
-    public TodoDto selectOne(int tno);
+    public TodoDto selectOne(Long tno);
     public String insertTodo(String title, String writer, String date);
-    public String updateTodo(int tno, String title, String dueDate, boolean finished);
-    public String deleteTodo(int tno);
+    public String updateTodo(Long tno, String title, String dueDate, boolean finished);
+    public String deleteTodo(Long tno);
     public int totalCountTodo();
 
     //검색

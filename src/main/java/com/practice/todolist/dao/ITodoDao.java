@@ -9,10 +9,10 @@ import java.util.Map;
 @Mapper
 public interface ITodoDao {
     public List<TodoDto> selectAll();
-    public TodoDto selectOne(int tno);
+    public TodoDto selectOne(Long tno);
     public void insertTodo(String title, String writer, String date);
-    public void updateTodo(int tno, String title, String date, boolean finished);
-    public void deleteTodo(int tno);
+    public void updateTodo(Long tno, String title, String date, boolean finished);
+    public void deleteTodo(Long tno);
     public int totalCountTodo();
 
     //검색

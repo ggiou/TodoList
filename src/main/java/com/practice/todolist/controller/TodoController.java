@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TodoController {
@@ -18,20 +21,20 @@ public class TodoController {
 
     @GetMapping("")
     public String todoRoot() throws Exception{
-        return "redirect:list"; //첫 화면 list 보이기
+        return "redirect:/todo/list"; //첫 화면 list 보이기
     }
 
     @GetMapping("list")
     public String todoListPage(Model model){
         model.addAttribute("todoList", todoService.selectAll());
-        return "/list"; //todoList 전체 보여주기 - 메인페이지
+        return "/todo/list"; //todoList 전체 보여주기 - 메인페이지
     }
 
     @GetMapping("read")
     public String todoRead(HttpServletRequest request, Model model){
-        int sTno = Integer.parseInt(request.getParameter("tno"));
+        Long sTno = Long.parseLong(request.getParameter("tno"));
         model.addAttribute("todo", todoService.selectOne(sTno));
-        return "/read"; //선택한 todo 게시글 보여주기
+        return "/todo/read"; //선택한 todo 게시글 보여주기
     }
 
     @GetMapping("registerForm")
@@ -43,21 +46,41 @@ public class TodoController {
     public String todoRegiter(TodoDto dto){
         todoService.insertTodo(dto.getTitle(), dto.getWriter(), dto.getDueDate().toString());
 
-        return "redirect:list"; //글 업로드 후 도로 main 페이지로 이동
+        return "redirect:/todo/list"; //글 업로드 후 도로 main 페이지로 이동
     }
 
     @PostMapping("modify")
     public String todoModify (TodoDto dto){
         todoService.updateTodo(dto.getTno(), dto.getTitle(), dto.getDueDate().toString(), dto.isFinished());
 
-        return "redirect:read"; //수정 후에는 read 페이지로 이동
+        return "redirect:/todo/read"; //수정 후에는 read 페이지로 이동
     }
 
     @GetMapping("delete")
     public String todoDelete (HttpServletRequest request){
-        todoService.deleteTodo(Integer.parseInt(request.getParameter("tno")));
+        todoService.deleteTodo(Long.parseLong(request.getParameter("tno")));
 
-        return "redirect:list";
+        return "redirect:/todo/list";
+    }
+
+    @PostMapping("search")
+    public String todoSearch (HttpServletRequest request, Model model){
+        String title = request.getParameter("title");
+        String writer = request.getParameter("writer");
+        String date1 = request.getParameter("date1");
+        String date2 = request.getParameter("date2");
+        String finished = request.getParameter("finished");
+
+        Map<String, String> map = new HashMap<>();
+        map.put("title", title);
+        map.put("writer", writer);
+        map.put("date1", date1);
+        map.put("date2", date2);
+        map.put("finished", finished);
+
+        List<TodoDto> todoList = todoService.findTodoList(map);
+
+        return "redirect:/todo/list";
     }
 
 }

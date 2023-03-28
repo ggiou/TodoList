@@ -30,7 +30,7 @@ class ITodoDaoTest {
 
     @Test
     void selectOne() {
-        int n = 1;
+        long n = 1;
         TodoDto todoDto = dao.selectOne(n);
         System.out.println(todoDto.getTno());
     } // select one test
@@ -50,7 +50,7 @@ class ITodoDaoTest {
 
     @Test
     void updateTodo() {
-        dao.updateTodo(2, "test2","2021/11/10",true);
+        dao.updateTodo(2L, "test2","2021/11/10",true);
         List<TodoDto> todoDtos = dao.selectAll();
         for (TodoDto todoDto : todoDtos) {
             System.out.println(todoDto.getTitle());
@@ -59,7 +59,7 @@ class ITodoDaoTest {
 
     @Test
     void deleteTodo() {
-        dao.deleteTodo(3);
+        dao.deleteTodo(3L);
         List<TodoDto> todoDtos = dao.selectAll();
         for (TodoDto todoDto : todoDtos) {
             System.out.println(todoDto.getTitle());

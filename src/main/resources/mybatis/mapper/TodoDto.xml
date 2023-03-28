@@ -28,8 +28,25 @@
     </select> <!--전체 todo 게시물 수 확인-->
 
     <select id="findTodoList" resultType="com.practice.todolist.dto.TodoDto">
-        select * from tbl_todo where title like #{title} and writer like #{writer}
-            and dueDate between #{date1} and #{date2} and finished = #{finished}
+        select * from tbl_todo where 
+        <choose>
+            <when test="title != null">
+                title like CONCAT('%',#{title},'%') and
+            </when>
+             <!-- title의 조건이 들어올 경우 -->
+            <when test="writer != null">
+                writer like CONCAT('%',#{writer},'%') and
+            </when>
+            <!-- writer의 조건이 들어올 경우 -->
+            <when test="date1 != null and date2 != null">
+            dueDate between #{date1} and #{date2} and </when>
+            <!-- date(날짜<문자>)+1-->
+            <!-- dueDate의 조건이 들어올 경우 -> 만약 안들어오면 그 전 or 그 후의 모든 기간이라 생각해 위와 같은 sql문을 선언 -->
+        </choose>
+        finished = #{finished}
+        <!-- select * from tbl_todo where title like ${title} and writer like ${writer} and
+        dueDate between #{date1} and #{date2} and finished = #{finished}
+        !! 마이 바티스의 동적 쿼리가 아닌, 직접 if문을 줘 문자열을 보내줄 경우 사용하는 sql문  -->
     </select>
 
 

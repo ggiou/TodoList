@@ -48,7 +48,7 @@ class TodoServiceTest {
     @DisplayName("todo 게시글 올리기 테스트")
     @Test
     void insertTodo() {
-        LocalDate date =  LocalDate.parse("2021-03-21", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate date =  LocalDate.parse("2021-11-12", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         service.insertTodo("테스트입니당", "사용자1", date.toString());
 
         selectOne();
@@ -60,7 +60,7 @@ class TodoServiceTest {
     @DisplayName("todo 리스트 업데이트 테스트")
     @Test
     void updateTodo() {
-        int tno = service.selectAll().get(0).getTno();  //가장 최신 게시물의 tno 가져오기
+        long tno = service.selectAll().get(0).getTno();  //가장 최신 게시물의 tno 가져오기
         service.updateTodo(tno, "수정테스트입니다.", "2022-01-11" ,true);
         TodoDto todoDto = service.selectOne(tno);
         assertThat(todoDto.getTitle()).isEqualTo("수정테스트입니다.");
@@ -71,7 +71,7 @@ class TodoServiceTest {
 
     @Test
     void deleteTodo() {
-        int tno = service.selectAll().get(0).getTno(); //가장 최신 게시물의 tno 가져오기
+        long tno = service.selectAll().get(0).getTno(); //가장 최신 게시물의 tno 가져오기
         service.deleteTodo(tno);
         if(service.selectOne(tno) == null) tno = -1;
         assertThat(tno).isEqualTo(-1);
@@ -87,17 +87,19 @@ class TodoServiceTest {
         map.put("writer", null);
         map.put("date1", null);
         map.put("date2", null);
-        map.put("finished", null);
+        map.put("finished", "2");
         //null, 즉 아무런 체크를 하지 않는다면 서비스 내부에서 해당조건에 대해서는 검색을 하지 않는다 생각
 
         List<TodoDto> todoList = service.findTodoList(map);
 
+        //System.out.println(todoList.size());
+
         assertThat(todoList.size()).isEqualTo(0);
         //검색조건이 없으면 = null, finished의 경우 무저건 true, false의 값으로 반환되야 하므로
-        //테스트를 위해 넣은 코드로 인해 finished에 null이 들어가면 2가 반환되므로 아무것도 검색되지 않는다
+        //테스트를 위해 넣은 코드로 인해 finished는 0, 1로 이루어져 2가들어가면  아무것도 검색되지 않는다
         //조건에 해당하는 결과가 없으므로 사이즈가 0이라면 알맞게 작동했다 생각해 테스트 성공
 
-        /* for (TodoDto todoDto : todoList) {
+        /*for (TodoDto todoDto : todoList) {
             System.out.println(todoDto.getTno());
             System.out.println(todoDto.getTitle());
             System.out.println(todoDto.getWriter());

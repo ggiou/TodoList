@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TodoDto {
-    private int tno;
+    private Long tno;
     private String title;
     private String writer;
     private LocalDate dueDate;

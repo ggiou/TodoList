@@ -38,6 +38,6 @@ application-database.properties
 ### VS Code ###
 .vscode/
 
-### css ###
+### BootStrap ###
 **/src/main/resources/css/
 **/src/main/resources/js/
