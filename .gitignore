@@ -37,3 +37,7 @@ application-database.properties
 
 ### VS Code ###
 .vscode/
+
+### css ###
+**/src/main/resources/css/
+**/src/main/resources/js/
